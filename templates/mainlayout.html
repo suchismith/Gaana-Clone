@@ -1,0 +1,57 @@
+<html>
+
+<head>
+
+
+	{% block head %}
+	<title>{% block title %}{% endblock %} My Webpage</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/gaana.css') }}">
+
+
+
+	{%endblock%}
+
+
+</head>
+
+<!-- Latest compiled and minified CSS -->
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Gaana Gao</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a href="/discover">Discover</a></li>
+				<li><a href="#">Radio</a></li>
+			
+		</div>
+	</nav>
+
+
+
+
+
+
+{%block body%}
+
+
+{%endblock%}
+
+  </body>
+</html>
+
+<!-- block control statement is used to define the place where the derived templates can insert themselves
+
+Blocks are given a unique name and content can enhanced/replaced in derived templates
+ -->

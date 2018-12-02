@@ -1,0 +1,28 @@
+
+{% for discover_list in data %}
+	<h1> {{ discover_list.heading }}</h1>
+	<div class="grid-container">
+	{% for data in discover_list.data_list %}
+	<div class="griditem">
+		<a  class="anchorlinks" href="#" data-link=" {{ url_for( discover_list.get_url , my_var = data ) }} " >
+    {{data}}
+	  </a>
+	  </div>
+	{% endfor %}
+</div>
+{% endfor %}
+
+
+<script>
+$("a.anchorlinks").click(function(){
+	alert($(this).data('link'))
+	$.get($(this).data('link'), function(response){
+		$("#siteloader").html(response.data1);
+
+	});
+});
+</script>
+<!-- block control statement is used to define the place where the derived templates can insert themselves
+
+Blocks are given a unique name and content can enhanced/replaced in derived templates
+ -->

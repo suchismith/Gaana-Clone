@@ -1,0 +1,440 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<div id="siteheader">
+
+	</div>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/gaana.css') }}">
+
+	<style>
+		body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+audio:hover, audio:focus, audio:active
+{
+-webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-webkit-transform: scale(1.05);
+-moz-transform: scale(1.05);
+transform: scale(1.05);
+}
+audio
+{
+-webkit-transition:all 0.5s linear;
+-moz-transition:all 0.5s linear;
+-o-transition:all 0.5s linear;
+transition:all 0.5s linear;
+-moz-box-shadow: 2px 2px 4px 0px #006773;
+-webkit-box-shadow:  2px 2px 4px 0px #006773;
+box-shadow: 2px 2px 4px 0px #006773;
+-moz-border-radius:7px 7px 7px 7px ;
+-webkit-border-radius:7px 7px 7px 7px ;
+border-radius:7px 7px 7px 7px ;
+}
+audio{
+	position:relative;
+	left:30%;
+	width: 40%;
+}
+a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+}
+a:hover, audio:focus, audio:active
+{
+-webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-webkit-transform: scale(1.05);
+-moz-transform: scale(1.05);
+transform: scale(1.05);
+}
+
+
+</style>
+</head>
+<body>
+<div class="mainview">
+<div id="siteloader" >
+		
+</div>
+<div class="audioframe">
+		<audio id="audio1" controls>
+		  <source  id="songs1"  type="audio/mpeg">
+			  Your browser does not support the audio tag.
+		</audio>
+	</div>
+
+
+<<<<<<< HEAD
+=======
+<div class="audioframe">
+	<a href="#" class="previous round" onclick="getNewIndexAndRender('previous')">&#8249;</a>
+	<a href="#" class="next round" onclick="getNewIndexAndRender('next')">&#8250;</a>
+	<audio id="audio1" controls>
+	  <source id="songs1" type="audio/mpeg">
+		  Your browser does not support the audio tag.
+	</audio>
+	<p id="result"></p>
+	<li class="dropup" id = "PLAY">
+		<a class="dropup-toggle" data-toggle="dropup" href="#">Menu 1
+		<span class="caret"></span></a>
+		<ul class="dropup-menu" id="playlist_list_div">
+		</ul>
+	</li>
+>>>>>>> 51b3cb78a954886e2383a6b9696f47674b853515
+</div>
+
+
+
+
+<div id="registerModal" class="modal">
+
+	<div class="modal-content">
+		<span class="close">&times;</span>
+
+
+		<h1>Register</h1>
+		{% from "includes/formhelper.html" import render_field %}
+		<form method="POST" id="RegisterForm" action="{{url_for('register')}}">
+			<div class="form-group">
+				{{render_field(register_form.email, class_="form-control")}}
+			</div>
+			<div class="form-group">
+				{{render_field(register_form.username, class_="form-control")}}
+			</div>
+			<div class="form-group">
+				{{render_field(register_form.password, class_="form-control")}}
+			</div>
+			<div class="form-group">
+				{{render_field(register_form.confirm, class_="form-control")}}
+			</div>
+			<p><input type="submit" class="btn btn-primary" value="Submit"></p>
+		</form>
+
+		
+	</div>
+
+</div>
+
+
+<div id="loginModal" class="modal">
+
+	<div class="modal-content">
+		<span class="close">&times;</span>
+
+		<h1>Sign In</h1>
+		<form method="POST" id="LoginForm" action="{{url_for('login')}}">
+			<div class="form-group">
+				<label>Username</label>
+				<input type="text" name="username" class="form-control" value={{request.form.username}}>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" name="password" class="form-control" value={{request.form.password}}>
+			</div>
+			<button type="submit" class="btn btn-primary" data-dismiss="modal"> Submit</button>
+		</form>
+
+		
+	</div>
+
+</div>
+
+<div id="uploadModal" class="modal role=" dialog">
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<form id="UploadForm" action="{{url_for('upload_song')}}" method="POST" enctype="multipart/form-data">
+				Audio:<input type="file" name="audiofile" accept="audio/*" required="">
+				Image:<input type="file" name="image_file" accept="image/*" required>
+
+				<div class="form-group">
+					<label>Name</label>
+					<input type="text" name="name" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label>Artist Name</label>
+					<input type="text" name="artist" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label>Genre</label>
+					<input type="text" name="genre" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label>Year</label>
+					<input type="text" name="year" class="form-control" required>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Upload Music</button>
+			</form>
+			
+		</div>
+
+	</div>
+</div>
+
+<div id="CreatePlaylistModal" class="modal">
+
+	<div class="modal-content">
+		<span class="close">&times;</span>
+
+		<h1>Sign In</h1>
+		<form method="POST" id="CreatePlaylistForm" action="{{url_for('create_playlist')}}">
+			<div class="form-group">
+				<label>Playlist Name</label>
+				<input type="text" id="CreatePlaylistText" name="playlist_name" class="form-control" value={{request.form.username}}>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+</div>
+
+
+
+	<script>
+		$("#UploadForm").submit(function (e) {
+			var form = $(this);
+			var url = form.attr('action');
+			var loggedin = true;
+			var form_data = new FormData($('#UploadForm')[0])
+			$.ajax({
+				type: "POST",
+				url: url,
+				contentType: false,
+				processData: false,
+				data: form_data,
+				cache: false, // serializes the form's elements.
+				success: function (data) {
+					alert(data.data1);
+					$("#siteheader").html(data.data1);
+					$.get('/get_songs', function (response) {
+						alert(response.data1)
+						$("#siteloader").html(response.data1);
+					});
+				}
+			});
+
+			e.preventDefault();
+		});
+
+		$("#RegisterForm").submit(function (e) {
+			var form = $(this);
+			var url = form.attr('action');
+			var loggedin = true;
+
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(), // serializes the form's elements.
+				success: function (data) {
+					alert(data);
+					$("#siteheader").html(data.data1);
+					loggedin = response.data2
+					if (loggedin == true) {
+						$.get('/get_songs', function (response) {
+							alert(response.data1)
+							$("#siteloader").html(response.data1);
+							logout = response.data2
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+
+
+		$("#LoginForm").submit(function (e) {
+			var form = $(this);
+			var url = form.attr('action');
+			var loggedin = true;
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(), // serializes the form's elements.
+				success: function (data) {
+					alert(data.data1);
+					$("#siteheader").html(data.data1);
+					loggedin = response.data2
+					if (loggedin == true) {
+						$.get('/get_songs', function (response) {
+							alert(response.data1)
+							$("#siteloader").html(response.data1);
+							logout = response.data2
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+		$("#CreatePlaylistForm").submit(function (e) {
+			var form = $(this);
+			var url = form.attr('action');
+			var loggedin = true;
+			alert(url)
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(), // serializes the form's elements.
+				success: function (data) {
+					alert(data)
+				}
+			});
+			$("#playlist_list_div").append("<a class = \"playl_list_list\"id=\""+$("#CreatePlaylistText").attr('value')+"\">" + $("#CreatePlaylistText").attr('value') + "</a>")
+			e.preventDefault();
+		});
+
+
+		$(document).ready(function () {
+			$.get('/navbar', function (response) {
+				alert(response.data1)
+				$("#siteheader").html(response.data1);
+
+			});
+			$.get('/get_songs', function (response) {
+				$("#siteloader").html(response.data1);
+
+			});
+			$.get('/get_playlist_list', function(response){
+				alert(response.data)
+				var res=""
+				for(i in response.data){
+					res+="<a class = \"playl_list_list\"id=\""+response.data[i]+"\">" + response.data[i] + "</a>";
+				}
+				$("#playlist_list_div").html(res);
+			});
+			$("#PLAY").style.display = "none"
+		});
+
+		$(document).on('click',".playl_list_list",function(){
+			alert("dhkfhds")
+			url = "add_to_playlist?playlist_name="+$(this).attr('id')+"&song_name="+$("#audio1").attr('src');
+			alert(url)
+			// $.get(url, function(response){
+				
+			// });
+		});
+		function playAudio(path) {
+			this.playOptions = document.getElementById("audio1");
+			this.playOptions.src = path;
+			this.playOptions.play();
+			$("#PLAY").style.display = "block"
+			$.get('/increment_count?song_name='+path, function(response){
+
+			});
+		}
+		var registerModal = document.getElementById('registerModal');
+
+		var loginModal = document.getElementById('loginModal');
+		var uploadModal = document.getElementById('uploadModal');
+		var createPlaylistModeal = document.getElementById('CreatePlaylistModal');
+		var span = document.getElementsByClassName("close")[0];
+		var span1 = document.getElementsByClassName("close")[1];
+		var span2 = document.getElementsByClassName("close")[2];
+		var span3 = document.getElementsByClassName("close")[3];
+		openRegForm = function () {
+			registerModal.style.display = "block";
+		}
+		openLoginForm = function () {
+
+			loginModal.style.display = "block";
+		}
+		openUploadForm = function () {
+
+			uploadModal.style.display = "block";
+		}
+
+		openCreatePlaylistForm = function () {
+
+			CreatePlaylistModal.style.display = "block";
+		}
+
+		span.onclick = function () {
+
+			registerModal.style.display = "none";
+
+		}
+		span1.onclick = function () {
+
+
+			loginModal.style.display = "none";
+		}
+		span2.onclick = function () {
+
+			uploadModal.style.display = "none";
+		}
+		span3.onclick = function(){
+			CreatePlaylistModal.style.display = "none";
+		}
+
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+	</script>
+
+
+
+
+
+
+
+
+
+	</body>
+
+
+</html>

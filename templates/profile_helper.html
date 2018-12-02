@@ -1,0 +1,15 @@
+<h3>{{ heading }}</h3>
+{% for user in data %}
+<p>{{ user.user_name }}</p>
+<p>{{ user.email_id }}</p>
+<button class = "anchor2-links" data-link = {{ url_for( 'view_profile', user = user.email_id)}}> View profile </button>
+{% endfor %}
+
+<script>
+    $("a.anchorlinks").click(function(){
+	$.get($('a.anchorlinks').data('link'), function(response){
+		$("#siteloader").html(response.data1);
+
+	});
+});
+</script>

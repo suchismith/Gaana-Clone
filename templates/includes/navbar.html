@@ -1,0 +1,104 @@
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			 aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#" id="Home">Gaana Clone</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#" id="Discover">Discover</a></li>
+				<li><a href="#" id="Radio">Radio</a></li>
+				<li><a href="#" id="MyMusic">My Music</a></li>
+				<li><button id = "Search" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button
+					></li>	
+			</ul>
+		
+				
+			
+			<ul class="nav navbar-nav navbar-right">
+				{% if logged_in %}
+				<li><a href="#" id="Profile">Profile</a></li>
+				<li><a id="LogoutForm" href="#">Logout</a></li>
+				<li><a href="#" onclick="openUploadForm()">Upload</a></li>
+				<li><a href="#" onclick="openCreatePlaylistForm()">Create Playlist</a></li>
+				{% else %}
+				<li><a href="#" onclick="openRegForm()">Register</a></li>
+				<li><a href="#" onclick="openLoginForm()">Login</a></li>
+				{% endif %}
+
+			</ul>
+		</div>
+		<!--nav-collapse -->
+	</div>
+</nav>
+<script>
+	$("#LogoutForm").click(function () {
+		alert('cicked logout')
+		var loggedin = true
+		$.get('/logout', function (response) {
+			alert(response.data1)
+			$("#siteheader").html(response.data1);
+			loggedin = response.data2
+			if (loggedin == false) {
+				$.get('/get_songs', function (response) {
+					alert(response.data1)
+					$("#siteloader").html(response.data1);
+					logout = response.data2
+				});
+			}
+		});
+
+	});
+
+	$("#Discover").click(function () {
+		$.get('/discover', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+
+	});
+
+	$("#Radio").click(function () {
+		$.get('/radio', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+
+	});
+
+	$("#Home").click(function () {
+		$.get('/get_songs', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+	});
+	$("#MyMusic").click(function () {
+		$.get('/mymusic', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+
+	});
+
+	$("#Search").click(function () {
+		$.get('/search_loader', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+
+	});
+
+	$("#MyMusic").click(function () {
+		$.get('mymusic', function (response){
+			$("#siteloader").html(response.data1);
+		});
+	});
+ 	$("#Profile").click(function () {
+		$.get('/profile', function (response) {
+			$("#siteloader").html(response.data1);
+		});
+
+	});
+
+</script>

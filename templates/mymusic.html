@@ -1,0 +1,12 @@
+
+{% for song_list in data %}
+	<h1> {{ song_list.title }}</h1>
+	<div class="row1">
+	{% for item in song_list.list_of_songs %}
+	<img class="mySlides" src="{{ item.image_path }}" onclick="playAudio('{{ item.song_path }}')">{{ item.song_name }}
+    {{ data }}
+	{% endfor %}
+	<button
+	</div>
+{% endfor %}
+

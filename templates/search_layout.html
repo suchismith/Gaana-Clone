@@ -1,0 +1,36 @@
+<form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
+    <div class="input-group">
+        <input name="searchtext" onkeyup="liveSearch(this.value)" class="form-control" type="text" placeholder="Enter name of song or artist">
+        <span class="input-group-btn">
+           <button class="btn btn-default" type="submit" id="addressSearch">
+           </button>
+        </span>
+    </div>
+</form>
+<div id = "sitemidder">
+
+</div>
+<script>
+    function liveSearch(value) {
+        // value = value.trim()
+        if(value != ""){
+            // alert("working")
+            $.ajax({
+                url: "/search",
+                data: {query: value},
+                success: function (data) {
+                    // alert(data)
+                    data = data.data1
+                    // alert(data)
+                    $("#sitemidder").html(data);
+                }
+            });
+        }
+        else{
+            $.get('/get_songs', function (response) {
+				$("#siteloader").html(response.data1);
+			});
+        }
+		e.preventDefault();
+	};
+</script>

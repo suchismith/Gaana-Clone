@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gaana.css') }}">
+<h3> Songs </h3>
+<div class="row1">
+{% for song in song_list %}
+
+<img class="mySlides" src="{{ song.image_path }}" onclick="playAudio('{{ song.song_path }}')">
+
+{% endfor %}
+</div>
+<h3> Artists </h3>
+<div class="grid-container">
+{% for artist in artist_list %}
+<div class="griditem">
+<p> {{artist}} </p>
+</div>
+{% endfor %}
+</div>
+<script>
+    var slideIndex = 0;
+    createImages(slideIndex)
+
+    function plusSlides(n) {
+        createImages(slideIndex += n);
+    }
+
+    function playAudio(path) {
+        this.playOptions = document.getElementById("audio1");
+        this.playOptions.src = path;
+        this.playOptions.play();
+    }
+
+    function createImages(slideIndex) {
+        if (slideIndex < 0)
+            slideIndex = 0;
+
+        console.log(slideIndex);
+        x = document.getElementsByClassName("mySlides");
+        if (slideIndex + 10 > x.length)
+            slideIndex = slideIndex - 1;
+        for (i = 0; i < slideIndex; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = slideIndex; i < slideIndex + 10 && i < x.length; i++) {
+            x[i].style.display = "block";
+        }
+        if (10 + slideIndex < x.length) {
+            for (i = 10 + slideIndex; i < x.length; i++)
+                x[i].style.display = "none";
+
+        }
+    }
+</script>

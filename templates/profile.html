@@ -1,0 +1,87 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container">
+    <div class="jumbotron">
+      <h3>Welcome {{ user.user_name }}</h3>
+      <h4> {{ user.email_id }}</h4>
+    </div>
+<div class="container">
+{% for entry in data %}
+  <button type="button" id = {{ entry }} class="btn btn-primary"> {{ entry }}</button>
+{% endfor %}
+</div>
+<div id = "sitemidder">
+  
+</div>
+<script>
+  $("#Followers").click(function () {
+    $.get('/people_list?query=followers', function (response){
+      $("#sitemidder").html(response.data1);
+    });
+  });
+  $("#Followers").click(function () {
+    $.get('people_list?query=following', function (response){
+      $("#sitemidder").html(response.data1);
+    });
+  });
+  $("#All_Users").click(function () {
+    $.get('people_list?query=hello', function (response){
+      $("#sitemidder").html(response.data1);
+    });
+  });
+  $("#Uploaded").click(function () {
+    $.get('song_list?query=upload', function (response){
+      $("#sitemidder").html(response.data1);
+    });
+  });
+  $("#Downloaded").click(function () {
+    $.get('song_list?query=download', function (response){
+      $("#sitemidder").html(response.data1);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

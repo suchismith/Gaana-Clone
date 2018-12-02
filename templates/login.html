@@ -1,0 +1,12 @@
+{% block body %}
+  <h1>Sign In</h1>
+  {% from "includes/formhelper.html" import render_field %}
+  <form mehod="POST" action="/login">
+    <div class="form-group">
+      {{render_field(register_form.username, class_="form-control")}}
+    </div>
+    <div class="form-group">
+      {{render_field(register_form.password, class_="form-control")}}
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gaana.css') }}">
+{% for song_list in data %}
+<div class="row1">
+	<p>{{ song_list }}</p>
+	<h3>{{ song_list.title }}</h3>
+
+	{% for item in song_list.list_of_songs %}
+	<!-- <p>
+		{{ item.image_path }}
+		{{ item.song_path }}
+	</p> -->
+	<img class="mySlides" src="{{ item.image_path }}" onclick="playAudio('{{ item.song_path }}')">
+	{% endfor %}
+
+	<button class="previous" onclick="plusSlides(-1)">&#10094;</button>
+		<button class="next" onclick="plusSlides(1)">&#10095;</button>
+</div>
+{% endfor %}
+
+
+
+
+<script>
+	var slideIndex = 0;
+	createImages(slideIndex)
+
+	function plusSlides(n) {
+		createImages(slideIndex += n);
+
+
+	}
+
+	function playAudio(path) {
+<<<<<<< HEAD
+
+		
+=======
+>>>>>>> 51b3cb78a954886e2383a6b9696f47674b853515
+		this.playOptions = document.getElementById("audio1");
+		this.playOptions.src = path;
+		this.playOptions.play();
+	}
+
+
+	function createImages(slideIndex) {
+
+		if (slideIndex < 0)
+			slideIndex = 0;
+
+		console.log(slideIndex);
+		x = document.getElementsByClassName("mySlides");
+
+
+		if (slideIndex + 10 > x.length)
+			slideIndex = slideIndex - 1;
+
+
+		for (i = 0; i < slideIndex; i++) {
+			x[i].style.display = "none";
+		}
+
+		for (i = slideIndex; i < slideIndex + 10 && i < x.length; i++) {
+			x[i].style.display = "block";
+		}
+		if (10 + slideIndex < x.length) {
+
+			for (i = 10 + slideIndex; i < x.length; i++)
+				x[i].style.display = "none";
+
+		}
+
+
+
+	}
+
+
+
+</script>
+
+<!-- block control statement is used to define the place where the derived templates can insert themselves
+
+Blocks are given a unique name and content can enhanced/replaced in derived templates
+ -->

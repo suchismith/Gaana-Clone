@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gaana.css') }}">
+
+<div class="row1">
+    <h3>{{ heading }}</h3>
+    {% for item in data %}
+    <img class="mySlides" src="{{ item.image_path }}" onclick="playAudio('{{ item.song_path }}')">{{ item.song_name }}
+    {%endfor%}
+
+</div>

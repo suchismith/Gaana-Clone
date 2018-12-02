@@ -1,0 +1,26 @@
+
+{% for song_list in data %}
+    <h1> {{ song_list.title }}</h1>
+    <div class="grid-container">
+    {% if song_list.list_of_songs is not none %}
+    {% for id in song_list.list_of_songs %}
+        <div class="grid-item">
+            <p> {{ id.song_id }} </p>
+        </div>
+    {% endfor %}
+
+    {% endif %}
+</div>
+  {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
